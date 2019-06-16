@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Form\SessionType;
-use App\Form\SessionEditType;
 use App\Entity\User;
 use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -68,8 +67,6 @@ class SessionController extends AbstractController
         ]);
     }
 
-
-
     //permet d'ajouter une autre session
     /**
      * @Route("calendrier/new/{id}", name="session_new", methods={"GET","POST"})
@@ -127,7 +124,7 @@ class SessionController extends AbstractController
      **/
     public function edit(Request $request, Session $session): Response
     {
-        $form = $this->createForm(SessionEditType::class, $session);
+        $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -144,7 +141,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-    /**permet la suppression d'un personnagejoueur d'une session en edition de la session**/
+    /**permet la suppression d'un personnagejoueur d'une session lors de l'edition de la session**/
     /**
     * @Route("personnagejoueur/delete/{id}/{session}", name="pj_session_delete", methods={"GET","POST"})
     */
@@ -153,23 +150,18 @@ class SessionController extends AbstractController
         //recuperation du depot personnage joueur
         $pj = $this->getDoctrine()->getRepository(PersonnageJoueur::class)->find($id);
 
-        dd($pj);
-        // $entityManager = $this->getDoctrine()->getManager();
-        // $entityManager->removePersonnageJoueur($pj);
-        // $entityManager->flush();
-        // // supprime le personnage joueur de la session en cours
-        $session->removePersonnageJoueur($pj);
+        //accès au service Doctrine et confier à gestionnaire
+        $entityManager = $this->getDoctrine()->getManager();
 
-        // //accès au service Doctrine et confier à gestionnaire
-        // $gestionnaire->removePersonnageJoueur($pj);
+        //suppression du pj de l'entity PersonnageJoueur et de l'entity Session
+        $entityManager->remove($pj);
 
         // //enregistre l'information de supresssion de l'objet
-        $session->flush();
+        $entityManager->flush();
 
         $message = $this->addFlash('suppressionPj','personnage joueur supprimé de la session');
         //affichage des articles
         return $this->redirectToRoute('session_show', ['id'=>$session->getId()]);
-
     }
 
     /**
@@ -186,6 +178,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('session_index');
     }
 
+    /** Permet l'inscription des joueurs à une session **/
     /**
      * @Route("session/inscription/{id}/{user}", name="session_inscription", methods={"GET","POST"})
      */
@@ -196,8 +189,6 @@ class SessionController extends AbstractController
          //recuperation du user
          $utilisateur = $this->getDoctrine()->getRepository(User::class)->find($user);
 
-         // //recuperation de la session
-         // $session= $this->getDoctrine()->getRepository(S)
 
          //creation de l'objet PersonnageJoueur
          $pj = new PersonnageJoueur();
