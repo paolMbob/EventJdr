@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {{ parent() }}
+        {{ form_start(formulaire) }}
+            {{ form_widget(formulaire) }}
+            <input type=submit value="Créer une nouvelle aventure"/>
+        {{ form_end(formulaire) }}
+    {% endblock %}

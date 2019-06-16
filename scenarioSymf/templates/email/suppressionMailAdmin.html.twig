@@ -1,0 +1,6 @@
+<h1> veuillez supprimer le compte de {{ name }}</h1>
+<p>Cet utilisateur a le(s) rôle(s):
+{% for role in roles %}
+    <p>{{role}}</p>
+{% endfor %}
+<p> Pour la suppression c'est par<a href="{{ url }}">ici</a>!</p>

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {{ parent() }}
+        <h1> Ajouter un univers</h1>
+        {{ form_start(formulaire) }}
+            {{ form_widget(formulaire) }}
+            <input type=submit value="Créer un monde merveilleux"/>
+        {{ form_end(formulaire) }}
+
+        <h2> Modifier un univers </h2>
+        <ul>
+        {% for univer in univers %}
+            <li><a href="{{ path('modificationUnivers', {'id':univer.id}) }}">{{univer.nom}}</a></li><br>
+        {% endfor %}
+        </ul>
+    {% endblock %}

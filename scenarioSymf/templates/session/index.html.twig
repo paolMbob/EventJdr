@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sessions{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Sessions</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Scénario</th>
+                <th>Maitre du jeu</th>
+                <th>Date et heure</th>
+                <th>Duree</th>
+                <th>Lieu</th>
+                <th>Personnages Joueurs</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+            <tr>
+                <td> <a href="{{path('scenario', {'id': session.scenario.id})}}">{{session.scenario.nom}}</a></td>
+                <td>{{session.mj.user.pseudo}}</td>
+                <td>{{ session.dateDebut ? session.dateDebut|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{session.dateFin ? date(session.dateFin).diff(date(session.dateDebut))|date('%h heures') : "non connue"}}</td>
+                <td>{{ session.lieu }}</td>
+                <td>
+                    <table class="table">
+                        <td>
+                            <tr>
+                            {% for pj in session.personnageJoueur %}
+                                <p>{{pj.user.pseudo}}: {{pj.race.race}}</p>
+                            {% endfor %}
+                            </tr>
+                        </td>
+                    </table>
+                </td>
+                <td>
+                    <a href="{{ path('session_show', {'id': session.id}) }}">Voir</a>
+                    {% if session.mj.user.id == app.user.id %}
+                        <a href="{{ path('session_edit', {'id': session.id}) }}">Modifier</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pas de sessions</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ path('session_new', {'id':app.user.id}) }}">Créer une nouvelle session</a>
+{% endblock %}

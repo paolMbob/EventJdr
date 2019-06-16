@@ -1,0 +1,11 @@
+<h1> Votre compte sur le site de la scénariothèque vient d'être modifié</h1>
+
+<p>Vous retrouverez les informations suivantes dans votre nouveau profil:<p>
+
+<p>Votre mail: {{mail}}</p>
+<p> Votre pseudo : {{name}}</p>
+{% for role in roles %}
+    <p> Votre role : {{role}} </p>
+{% endfor %}
+
+Vous pouvez dès maintenant vous connecter <a href="{{ url }}">ici</a>!

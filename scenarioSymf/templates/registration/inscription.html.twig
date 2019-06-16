@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Inscription</h1>
+    {{ form_start(inscriptionForm) }}
+        <p>Email</p>
+        {{ form_widget(inscriptionForm.email) }}
+        <p>Pseudo</p>
+        {{form_widget(inscriptionForm.pseudo)}}
+        <p>Mot de passe</p>
+        {{ form_widget(inscriptionForm.plainPassword) }}<br>
+        <button class="btn">Inscription</button>
+    {{ form_end(inscriptionForm) }}
+{% endblock %}

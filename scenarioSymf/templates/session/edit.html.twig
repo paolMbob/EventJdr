@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Modifier la session </h1>
+
+    {{ include('session/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('session_index') }}">Revenir à la liste</a>
+
+    {{ include('session/_delete_form.html.twig') }}
+
+    <h2>Supprimer les participants</h2>
+    <span>Vous pouvez supprimer un participant en le sélectionnant</span>
+    <ul>
+        {% for pj in session.personnageJoueur %}
+            <li><a href="{{ path('pj_session_delete', {'id': pj.id, 'session':session.id}) }}">{{pj.user.pseudo}}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

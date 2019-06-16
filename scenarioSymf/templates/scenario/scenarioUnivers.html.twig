@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+    {% block nav %}
+        {{ parent() }}
+            <h2> Choississez quelle aventure vous souhaitez découvrir ?</h2>
+            {{ form_start(formulaire) }}
+                {{ form_widget(formulaire.univers) }}<input type=submit value="Ok"/>
+            {{ form_end(formulaire) }}
+
+            <h2>Les scénarios</h2>
+            <ul>
+                {% if scenarios is defined and scenarios is not null %}
+                    {% for scenario in scenarios %}
+                        <li><a href="{{ path('scenario', {'id':scenario.id}) }}">{{scenario.nom}}</a></li>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('supprimerScenario', {'id':scenario.id}) }}">Supprimer</a>
+                            <a href="{{ path('modificationScenario', {'id':scenario.id}) }}">Modifier</a>
+                        {% endif %}
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+
+
+    {% endblock %}

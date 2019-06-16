@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {{parent()}}
+
+        <h1> {{scenario.nom}} </h1>
+        <img src="{{ asset('images/' ~ scenario.image) }}"/>
+        <p> {{scenario.texte}} </p>
+        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <a href="{{ path('commentaire', {'id':scenario.id}) }}">Donnez votre avis</a>
+            <p><a href="{{path('session', {'id':scenario.id}) }}">Accéder aux sessions<a></p>
+
+        {% else %}
+            <span> Veuillez vous <a href="{{ path('app_login')}}">connecter</a> ou vous <a href="{{ path('inscription')}}">inscrire</a> pour donner votre avis </span>
+        {% endif %}<br>
+        {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('session_new', {'id':app.user.id})  }}">créer une nouvelle session</a>
+        {% endif %}
+        <h2>Comentaires</h2>
+        <table>
+            <th>Auteur</th>
+            <th>Commentaires</th>
+            <th>Date</th>
+            <th>Note</th>
+            <th>Action Commentaire</th>
+        {% for commentaire in scenario.commentaires %}
+        <tr>
+            <td>
+                {% for user in listeUser %}
+                    {% if user == commentaire.auteur %}
+                        {{user.pseudo}}
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{commentaire.description}}</td>
+            <td>{{commentaire.date|date("d-m-Y")}}</td>
+            <td class='note'>
+
+
+            {% for note in 1..commentaire.note %}
+                <span>&#9733;</span>
+            {% endfor %}
+            </td>
+            <td>
+            {% if is_granted('ROLE_ADMIN') or commentaire.auteur == app.user %}
+                <a href="{{ path('supprimerCommentaire', {'id':commentaire.id}) }}">Supprimer</a>
+                <a href="{{ path('modificationCommentaire', {'id':commentaire.id}) }}">Modifier</a>
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </table>
+
+    {% endblock %}

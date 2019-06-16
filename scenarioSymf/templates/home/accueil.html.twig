@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {{ parent() }}
+        {% block h1 %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+            <h1>Bienvenue {{app.user.pseudo}} sur la scénariothèque des gobelins</h1>
+        {% else %}
+            <h1>Bienvenue sur la scénariothèque des gobelins</h1>
+        {% endif %}
+        {% endblock %}
+        <p> Vous trouverez les scénarios de quelques aventuriers en libre accès sur ce site,
+        les avis et notes de chaque scénario</p>
+        {% block nouveaute %}
+            <h2> Nos dernières aventures </h2>
+            <table>
+                <th>Aventure</th>
+                <th>Scénarios</th>
+                <th>Nb d'avis</th>
+                {% for scenario in scenarios %}
+                <tr>
+                    <td>
+                        {{scenario.univers.nom}}
+                    </td>
+                    <td>
+                        <a href="{{ path('scenario', {'id':scenario.id}) }}">{{scenario.nom}}</a>
+                    </td>
+                    <td>
+                    {% set i = 0 %}
+                    {% for commentaires in scenario.commentaires %}
+                        {% set i = i + 1 %}
+                        {% endfor %}
+                    {{i}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <h3> <a href="{{path('session_calendar')}}">Accéder au calendrier des sessions<a></h3>
+        {% endblock %}
+    {% endblock %}

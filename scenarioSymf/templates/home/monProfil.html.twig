@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {{ parent() }}
+        {{ form_start(formulaire) }}
+            {{ form_widget(formulaire) }}
+            <input type=submit value="modifier"/>
+        {{ form_end(formulaire) }}
+        <button><a href="{{ path('demande_delete', {'id':app.user.id}) }}">Demander la suppression de mon compte</a></button>
+    {% endblock %}
