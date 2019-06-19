@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}scenariotheque{% endblock %}</title>
         <link rel="stylesheet" href={{ asset("/css/style.css") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/css/main.css") }}>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -12,8 +13,8 @@
             <header>
                 {% block header %}
 
-
-                <nav>
+            <div  id="sidebar">
+                <nav id="nav" class="box recent-posts">
                     {% block nav %}
                     <ul>
                         <li> <a href="{{ path('accueil') }}">Accueil</a></li>
@@ -33,9 +34,12 @@
                         {% endif %}
 
                     </ul>
+                    <section class="box calendar">
+                        {% include '@Calendar/calendar.html' %}
+                    </section>
                     {% endblock %}
                 </nav>
-
+            </div>
             {% endblock %}
             </header>
                 {% for message in
@@ -90,7 +94,7 @@
                     app.session.flashBag.get('suppressionPj') %}
                     <span class='error'>{{message}}</span>
                 {% endfor %}
-            
+
         {% endblock %}
         <br>
         {% block javascripts %}{% endblock %}

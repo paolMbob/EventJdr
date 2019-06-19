@@ -145,10 +145,29 @@ class SessionController extends AbstractController
     /**
     * @Route("personnagejoueur/delete/{id}/{session}", name="pj_session_delete", methods={"GET","POST"})
     */
-    public function deletePjSession($id, Session $session)
+    public function deletePjSession($id, Session $session, \Swift_Mailer $mailer)
     {
         //recuperation du depot personnage joueur
         $pj = $this->getDoctrine()->getRepository(PersonnageJoueur::class)->find($id);
+
+        //récupération du mail de l'utilisateur personnage joueur
+        $user = $pj->getUser()->getEmail();
+
+        /***********envoit du mail de confirmation à l'utilisateur**************/
+        $messageUser = (new \Swift_Message('personnage supprimé'))
+            ->setFrom('marlenebobat@gmail.com')
+            ->setTo($user)
+            ->setBody(
+                $this->renderView(
+                    'email/deletePersonnage.html.twig',
+                    ['session'=> $session,
+                    'personnage'=> $pj->getRace()->getRace(),
+                    'url'=> 'http://localhost:8000/accueil']),
+                    'text/html'
+                );
+
+        //envoi du mail
+        $mailer->send($messageUser);
 
         //accès au service Doctrine et confier à gestionnaire
         $entityManager = $this->getDoctrine()->getManager();
@@ -182,18 +201,18 @@ class SessionController extends AbstractController
     /**
      * @Route("session/inscription/{id}/{user}", name="session_inscription", methods={"GET","POST"})
      */
-     public function inscription(Request $requete, Session $session, $id,$user): Response
+     public function inscription(Request $requete, Session $session, $id,$user, \Swift_Mailer $mailer): Response
      {
          /**************************création du personnage joueur**********************************/
-
-         //recuperation du user
-         $utilisateur = $this->getDoctrine()->getRepository(User::class)->find($user);
 
 
          //creation de l'objet PersonnageJoueur
          $pj = new PersonnageJoueur();
 
          $formulaire = $this->createForm(PersonnageJoueurType::class, $pj);
+
+         //recuperation du mail du pj pour l'envoit
+         $userMail= $this->getDoctrine()->getRepository(User::class)->find($user)->getEmail();
 
          // $personnageJoueur= $this->getDoctrine()->getRepository(MaitreDuJeu::class)->findOneBy(['user'=>$utilisateur]);
 
@@ -216,6 +235,23 @@ class SessionController extends AbstractController
 
              //enregistre l'ajout des données
              $gestionnaire->flush();
+
+
+             /***********envoit du mail de confirmation à l'utilisateur**************/
+             $messageUser = (new \Swift_Message('inscription à une session'))
+                 ->setFrom('marlenebobat@gmail.com')
+                 ->setTo($userMail)
+                 ->setBody(
+                     $this->renderView(
+                         'email/inscriptionPersonnage.html.twig',
+                         ['session'=> $session,
+                         'personnage'=> $pj->getRace()->getRace(),
+                         'url'=> 'http://localhost:8000/accueil']),
+                         'text/html'
+                     );
+
+             //envoi du mail
+             $mailer->send($messageUser);
 
              $message = $this->addFlash('inscription','votre participation à été ajouté avec succès');
 
