@@ -2,9 +2,9 @@
 
 {% block title %}Connectez vous!{% endblock %}
 
-{% block body %}
+{% block contener %}
     {{parent()}}
-
+    
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

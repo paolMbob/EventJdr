@@ -1,24 +1,49 @@
 {% extends 'base.html.twig' %}
-    {% block nav %}
+    {% block contener %}
         {{ parent() }}
-            <h2> Choississez quelle aventure vous souhaitez découvrir ?</h2>
-            {{ form_start(formulaire) }}
-                {{ form_widget(formulaire.univers) }}<input type=submit value="Ok"/>
-            {{ form_end(formulaire) }}
 
-            <h2>Les scénarios</h2>
-            <ul>
-                {% if scenarios is defined and scenarios is not null %}
-                    {% for scenario in scenarios %}
-                        <li><a href="{{ path('scenario', {'id':scenario.id}) }}">{{scenario.nom}}</a></li>
-                        {% if is_granted("ROLE_ADMIN") %}
-                            <a href="{{ path('supprimerScenario', {'id':scenario.id}) }}">Supprimer</a>
-                            <a href="{{ path('modificationScenario', {'id':scenario.id}) }}">Modifier</a>
-                        {% endif %}
-                        <br>
-                    {% endfor %}
-                {% endif %}
-            </ul>
+            <article class="box post post-excerp">
+                <header>
+                    <h2> Choississez quel univers vous souhaitez découvrir ?</h2>
+                    {{ form_start(formulaire) }}
+                        {{ form_widget(formulaire.univers) }}<input type=submit value="Ok"/>
+                    {{ form_end(formulaire) }}
+                    </header>
+            </article>
 
 
+            <section class="box recent-comments">
+						<header>
+							<h2>Les Scénarios</h2>
+						</header>
+                        <ul>
+                            {% if scenarios is defined and scenarios is not null %}
+                                {% for scenario in scenarios %}
+                                    <li class="current"><a href="{{ path('scenario', {'id':scenario.id}) }}" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)";>{{scenario.nom}}</a></li>
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                        <a href="{{ path('supprimerScenario', {'id':scenario.id}) }}">Supprimer</a>
+                                        <a href="{{ path('modificationScenario', {'id':scenario.id}) }}">Modifier</a>
+                                    {% endif %}
+                                    {# on utilise une variable total et nb d'iteration pour calculer la moyenne #}
+                                        {% set i = 0 %}
+                                        {% set total = 0 %}
+                                        {# calcul total et iteration #}
+                                        {% for commentaire in scenario.commentaires %}
+                                            {% set total = total + commentaire.note %}
+                                            {% set i = i + 1 %}
+                                        {% endfor %}
+                                        {# calcul average #}
+
+                                        {% if total > 0 and i > 0 %}
+                                            {% set average = total / i %}
+                                            {# affichage dans le scenario de la moyenne des avis #}
+                                            {% for etoile in 1..average %}
+                                                <span>&#9733;</span>
+                                            {% endfor %}
+                                        {% endif %}
+                                    <br>
+                                {% endfor %}
+                            {% endif %}
+                            </ul>
+				</section>
     {% endblock %}

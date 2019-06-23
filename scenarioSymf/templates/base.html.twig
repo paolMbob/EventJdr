@@ -5,43 +5,51 @@
         <title>{% block title %}scenariotheque{% endblock %}</title>
         <link rel="stylesheet" href={{ asset("/css/style.css") }}>
         <link rel="stylesheet" href={{ asset("html5up-striped/assets/css/main.css") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/css/fontawesome-all.min.css") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/sass/main.scss") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/sass/libs/_breakpoints.scss") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/sass/libs/_functions.scss") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/sass/libs/_html-grid.scss") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/sass/libs/_mixins.scss") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/sass/libs/_vars.scss") }}>
+        <link rel="stylesheet" href={{ asset("html5up-striped/assets/sass/libs/_vendor.scss") }}>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}
 
+        {% block body %}
             <header>
                 {% block header %}
-
-            <div  id="sidebar">
-                <nav id="nav" class="box recent-posts">
-                    {% block nav %}
-                    <ul>
-                        <li> <a href="{{ path('accueil') }}">Accueil</a></li>
-                        <li> <a href="{{ path('scenarios') }}">Scénarios</a></li>
-
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <li> <a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                            <li> <a href="{{ path('monProfil', {'id':app.user.id}) }}">Mon Compte</a></li>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <li> <a href="{{ path('ajout') }}">Nouvelle aventure</a></li>
-                                <li> <a href="{{ path('ajoutUnivers') }}">Les univers</a></li>
-                                <li> <a href="{{ path('parametre_utilisateur') }}">Paramètre</a></li>
+                <div  id="sidebar">
+                    <h1 id="logo">Scénariothèque des gobelins</h1>
+                    <nav id="nav" class="box recent-posts">
+                        {% block nav %}
+                        <ul>
+                            <li> <a href="{{ path('accueil') }}">Accueil</a></li>
+                            <li> <a href="{{ path('scenarios') }}">Scénarios</a></li>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li> <a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                                <li> <a href="{{ path('monProfil', {'id':app.user.id}) }}">Mon Compte</a></li>
+                                <li> <a href="{{path('session_calendar')}}">Accéder au calendrier des sessions</a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li> <a href="{{ path('ajout') }}">Nouvelle aventure</a></li>
+                                    <li> <a href="{{ path('ajoutUnivers') }}">Les univers</a></li>
+                                    <li> <a href="{{ path('parametre_utilisateur') }}">Paramètre</a></li>
+                                {% endif %}
+                            {% else %}
+                                <li> <a href="{{ path('app_login') }}">se connecter</a></li>
+                                <li> <a href="{{ path('inscription') }}">s'inscrire</a></li>
                             {% endif %}
-                        {% else %}
-                            <li> <a href="{{ path('app_login') }}">se connecter</a></li>
-                            <li> <a href="{{ path('inscription') }}">s'inscrire</a></li>
-                        {% endif %}
 
-                    </ul>
-                    <section class="box calendar">
-                        {% include '@Calendar/calendar.html' %}
-                    </section>
-                    {% endblock %}
-                </nav>
-            </div>
-            {% endblock %}
+                        </ul>
+                        {% endblock %}
+                    </nav>
+                </div>
+                {% endblock %}
             </header>
+            <div id="content">
+                <div class="inner">
+                {% block contener %}
                 {% for message in
                     app.session.flashBag.get('scenario') %}
                     <span class='error'>{{message}}</span>
@@ -94,9 +102,18 @@
                     app.session.flashBag.get('suppressionPj') %}
                     <span class='error'>{{message}}</span>
                 {% endfor %}
+                <br>
+            {% endblock %}
 
+            </div>
+        </div>
+        {% block javascripts %}
+            <script src="html5up-striped/assets/js/breakpoints.min.js"></script>
+            <script src="html5up-striped/assets/js/browser.min.js"></script>
+            <script src="html5up-striped/assets/js/jquery.min.js"></script>
+            <script src="html5up-striped/assets/js/main.js"></script>
+            <script src="html5up-striped/assets/js/util.js"></script>
         {% endblock %}
-        <br>
-        {% block javascripts %}{% endblock %}
+    {% endblock %}
     </body>
 </html>
