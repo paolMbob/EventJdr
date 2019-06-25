@@ -1,15 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block contener %}
     {{ parent() }}
-    <h1>Inscription</h1>
-    {{ form_start(inscriptionForm) }}
-        <p>Email</p>
-        {{ form_widget(inscriptionForm.email) }}
-        <p>Pseudo</p>
-        {{form_widget(inscriptionForm.pseudo)}}
-        <p>Mot de passe</p>
-        {{ form_widget(inscriptionForm.plainPassword) }}<br>
-        <button class="btn">Inscription</button>
-    {{ form_end(inscriptionForm) }}
+    <article class="box post post-excerp">
+        <header>
+            <h2>Inscription</h2>
+            {{ form_start(inscriptionForm) }}
+                <p>Email</p>
+                {{ form_widget(inscriptionForm.email) }}
+                <p>Pseudo</p>
+                {{form_widget(inscriptionForm.pseudo)}}
+                <p>Mot de passe</p>
+                {{ form_widget(inscriptionForm.plainPassword) }}<br>
+                <button class="btn">Inscription</button>
+            {{ form_end(inscriptionForm) }}
+        </header>
+    </article>
 {% endblock %}

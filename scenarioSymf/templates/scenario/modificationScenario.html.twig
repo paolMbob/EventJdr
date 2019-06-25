@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
+    {% block contener %}
         {{ parent() }}
+    <section class="box recent-comments">
         {{ form_start(formulaire) }}
             {{ form_widget(formulaire) }}
             <input type=submit value="modifier"/>
         {{ form_end(formulaire) }}
+    </section>
     {% endblock %}

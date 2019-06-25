@@ -26,6 +26,7 @@
                         {% block nav %}
                         <ul>
                             <li> <a href="{{ path('accueil') }}">Accueil</a></li>
+                            <br>
                             <li> <a href="{{ path('scenarios') }}">Scénarios</a></li>
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                 <li> <a href="{{ path('app_logout') }}">Se déconnecter</a></li>
@@ -52,55 +53,55 @@
                 {% block contener %}
                 {% for message in
                     app.session.flashBag.get('scenario') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('univers') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('commentaire') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('suppression') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('suppressionCommentaire') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('modification') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('modificationCompte') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('suppressionUser') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('DemandeSuppressionUser') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('modificationUnivers') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('modificationCommentaire') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('inscription') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 {% for message in
                     app.session.flashBag.get('suppressionPj') %}
-                    <span class='error'>{{message}}</span>
+                    <span class='button next'>{{message}}</span>
                 {% endfor %}
                 <br>
             {% endblock %}

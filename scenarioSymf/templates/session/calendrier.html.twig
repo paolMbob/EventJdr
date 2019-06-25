@@ -5,12 +5,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
 {% endblock %}
 
-{% block body %}
+{% block contener %}
     {{parent()}}
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('session_new', {'id':app.user.id})  }}">créer une nouvelle session</a>
-    {% endif %}
     {% include '@Calendar/calendar.html' %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('session_new', {'id':app.user.id})  }}" class="icon fa-plus-square"> ajouter une session</a>
+    {% endif %}
 {% endblock %}
 {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>

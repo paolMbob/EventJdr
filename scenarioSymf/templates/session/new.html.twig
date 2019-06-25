@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle session{% endblock %}
+{% block contener %}
+    {{parent()}}
 
-{% block body %}
-    <h1>Créer une nouvelle session</h1>
+    <article class="box post post-excerp">
+        <header>
+            <h1>Créer une nouvelle session</h1>
 
-    {{ include('session/_form.html.twig') }}
+            {{ include('session/_form.html.twig') }}
 
-
-
-    <a href="{{ path('session_index') }}">Revenir à la liste</a>
+            <a href="{{ path('session_index') }}">Revenir à la liste</a>
+        </header>
+    </article>
 {% endblock %}
