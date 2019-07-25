@@ -22,10 +22,10 @@
                                     <li class="current"><a href="{{ path('scenario', {'id':scenario.id}) }}" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0)";>{{scenario.nom}}</a></li>
 
                                     {% if is_granted("ROLE_ADMIN") %}
-                                        {# <ul class="stats"> #}
+
                                             <a href="{{ path('supprimerScenario', {'id':scenario.id}) }}" class="icon fa-times-circle"></a>
                                             <a href="{{ path('modificationScenario', {'id':scenario.id}) }}" class="icon fa-edit"></a>
-                                        {# </ul> #}
+                                        
                                     {% endif %}
                                     {# on utilise une variable total et nb d'iteration pour calculer la moyenne #}
                                         {% set i = 0 %}

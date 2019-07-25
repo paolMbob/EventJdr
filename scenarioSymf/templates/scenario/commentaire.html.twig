@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
+    {% block contener %}
         {{parent()}}
-        <h1> {{titreScenario.nom}} </h1>
+        <h2> {{titreScenario.nom}} </h2>
+        <br>
         {{ form_start(formulaire) }}
             {{ form_widget(formulaire) }}
             <input type=submit value="Ajouter votre griffe!"/>

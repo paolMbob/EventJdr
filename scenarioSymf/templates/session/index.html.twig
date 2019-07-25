@@ -2,7 +2,7 @@
 
 {% block title %}Liste des sessions{% endblock %}
 
-{% block body %}
+{% block contener %}
     {{ parent() }}
     <h1>Sessions</h1>
 
@@ -51,6 +51,6 @@
         {% endfor %}
         </tbody>
     </table>
-    
+
     <a href="{{ path('session_new', {'id':app.user.id}) }}">Créer une nouvelle session</a>
 {% endblock %}

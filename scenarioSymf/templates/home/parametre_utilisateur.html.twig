@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
-{% block body %}
+{% block contener %}
         {{ parent() }}
-    <h1> Liste des utilisateurs du blog </h1>
-        <table>
-            <th>Email<th>
-            <th>Groupe de droits</th>
-            {% for user in users %}
-            <tr>
-                <td><a href="{{ path('modificationCompte' , {'id':user.id}) }}">{{user.pseudo}}</a></td>
-                <td><a href="{{ path('delete_user', {'id':user.id}) }}">Désinscrire</a></td>
-                {% for role in user.roles %}
-                    <td>{{role}}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </table>
+        <article class="box post post-excerp">
+            <header>
+                <h2> Liste des utilisateurs du blog </h2>
+                    <table>
+                        <th>Email<th>
+                        <th>Groupe de droits</th>
+                        {% for user in users %}
+                        <tr>
+                            <td><a href="{{ path('modificationCompte' , {'id':user.id}) }}">{{user.pseudo}}</a></td>
+                            <td><a href="{{ path('delete_user', {'id':user.id}) }}">Désinscrire</a></td>
+                            {% for role in user.roles %}
+                                <td>{{role}}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </header>
+            </article>
     {% endblock %}

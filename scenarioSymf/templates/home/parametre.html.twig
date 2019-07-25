@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
+    {% block contener %}
         {{ parent() }}
-        {% block h1 %}
-            <button> <a href="{{ path('parametre_utilisateur') }}">Modifier un utilisateur</button>
-        {% endblock %}
+        <article class="box post post-excerp">
+            <header>
+                {% block h1 %}
+                    <button> <a href="{{ path('parametre_utilisateur') }}">Modifier un utilisateur</button>
+                {% endblock %}
+            </header>
+        </article>
     {% endblock %}

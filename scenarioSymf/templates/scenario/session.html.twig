@@ -1,36 +1,40 @@
 {% extends 'base.html.twig' %}
-    {% block nav %}
+    {% block contener %}
         {{ parent() }}
-            <h2>Dates de sessions</h2>
-            <table>
-                <th>Aventure</th>
-                <th>Date</th>
-                <th>maitre du jeu</th>
-                <th>Lieu</th>
-                <th>Duree</th>
-                <th>personnages joueurs</th>
-                <th>Actions</th>
-                {% for session in sessions %}
-                    <tr>
-                        <td><a href="{{path('scenario', {'id': session.scenario.id})}}">{{session.scenario.nom}}</a></td>
-                        <td>{{ session.dateDebut ? session.dateDebut|date('d-m-Y H:i:s') : '' }}</td>
-                        <td>{{session.mj.user.pseudo}}</td>
-                        <td>{{session.lieu}}</td>
-                        <td>{{session.dateFin ? date(session.dateFin).diff(date(session.dateDebut))|date('%h heures') : "non connue"}}</td>
-                        <td>
-                        {% for pj in session.personnageJoueur %}
-                            <p>{{pj.user.pseudo}}:{{pj.race.race}}</p>
-                        {% endfor %}
-                        </td>
-                        <td>
-                            <a href="{{ path('session_inscription',{'id':session.id, 'user':app.user.id}) }}">S'inscrire</a>
-                            {% if session.mj.user.id == app.user.id %}
-                                <a href="{{ path('session_edit', {'id': session.id}) }}">Modifier</a>
-                            {% endif %}
-                        </td>
+        <article class="box post post-excerpt">
+            <header>
+                <h2>Dates de sessions</h2>
+                <table>
+                    <th>Aventure</th>
+                    <th>Date</th>
+                    <th>maitre du jeu</th>
+                    <th>Lieu</th>
+                    <th>Duree</th>
+                    <th>personnages joueurs</th>
+                    <th>Actions</th>
+                    {% for session in sessions %}
+                        <tr>
+                            <td><a href="{{path('scenario', {'id': session.scenario.id})}}">{{session.scenario.nom}}</a></td>
+                            <td>{{ session.dateDebut ? session.dateDebut|date('d-m-Y H:i:s') : '' }}</td>
+                            <td>{{session.mj.user.pseudo}}</td>
+                            <td>{{session.lieu}}</td>
+                            <td>{{session.dateFin ? date(session.dateFin).diff(date(session.dateDebut))|date('%h h') : "non connue"}}</td>
+                            <td>
+                            {% for pj in session.personnageJoueur %}
+                                <p>{{pj.user.pseudo}}:{{pj.race.race}}</p>
+                            {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path('session_inscription',{'id':session.id, 'user':app.user.id}) }}">S'inscrire</a>
+                                {% if session.mj.user.id == app.user.id %}
+                                    <a href="{{ path('session_edit', {'id': session.id}) }}">Modifier</a>
+                                {% endif %}
+                            </td>
 
-                {% endfor %}
-                    <tr>
-            </table>
-            <a href="{{ path('scenario', {'id':scenario.id}) }}">Retour au scénario {{scenario.nom}}</a>
+                    {% endfor %}
+                        <tr>
+                </table>
+            </header>
+                <a href="{{ path('scenario', {'id':scenario.id}) }}">Retour au scénario</a>
+        </article>
     {% endblock %}

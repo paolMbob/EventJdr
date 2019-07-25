@@ -2,56 +2,59 @@
 
 {% block title %}Session{% endblock %}
 
-{% block body %}
+{% block contener %}
     {{ parent() }}
-    <h1>Session</h1>
+    <article class="box post post-excerpt">
+        <header>
+            <h2>Session</h2>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Scenario</th>
-                <td><a href="{{path('scenario', {'id': session.scenario.id})}}">{{session.scenario.nom}}</a></td>
-            </tr>
-            <tr>
-                <th>Maitre du jeu</th>
-                <td>{{ session.mj.user.pseudo }}</td>
-            </tr>
-            <tr>
-                <th>Date de début</th>
-                <td>{{ session.dateDebut ? session.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Durée</th>
-                <td>{{session.dateFin ? date(session.dateFin).diff(date(session.dateDebut))|date('%h heures') : "non connue"}}</td>
-            </tr>
-            <tr>
-                <th>Lieu</th>
-                <td>{{ session.lieu }}</td>
-            </tr>
-            <tr>
-                <th>Personnages Joueurs</th>
-                <td>
-                {% for pj in session.personnageJoueur %}
-                    <p>{{pj.user.pseudo}}:  {{pj.race.race}}</p>
-                {% endfor %}
-                <td>
-            </tr>
-            <tr>
-                <th>Actions</th>
-                <td>
-                <a href="{{ path('session_index') }}">liste des sessions</a>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('session_inscription',{'id':session.id, 'user':app.user.id}) }}">S'inscrire</a>
-                {% endif %}
-                {% if session.mj.user.id == app.user.id %}
-                    <a href="{{ path('session_edit', {'id': session.id}) }}">Modifier</a>
-                    {{ include('session/_delete_form.html.twig') }}
-                {% endif %}
-                <td>
-            </tr>
-        </tbody>
-    </table>
-
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Scenario</th>
+                        <td><a href="{{path('scenario', {'id': session.scenario.id})}}">{{session.scenario.nom}}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Maitre du jeu</th>
+                        <td>{{ session.mj.user.pseudo }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de début</th>
+                        <td>{{ session.dateDebut ? session.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Durée</th>
+                        <td>{{session.dateFin ? date(session.dateFin).diff(date(session.dateDebut))|date('%h heures') : "non connue"}}</td>
+                    </tr>
+                    <tr>
+                        <th>Lieu</th>
+                        <td>{{ session.lieu }}</td>
+                    </tr>
+                    <tr>
+                        <th>Personnages Joueurs</th>
+                        <td>
+                        {% for pj in session.personnageJoueur %}
+                            <p>{{pj.user.pseudo}}:  {{pj.race.race}}</p>
+                        {% endfor %}
+                        <td>
+                    </tr>
+                    <tr>
+                        <th>Actions</th>
+                        <td>
+                        <a href="{{ path('session_index') }}">liste des sessions</a>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ path('session_inscription',{'id':session.id, 'user':app.user.id}) }}">S'inscrire</a>
+                        {% endif %}
+                        {% if session.mj.user.id == app.user.id %}
+                            <a href="{{ path('session_edit', {'id': session.id}) }}">Modifier</a>
+                            {{ include('session/_delete_form.html.twig') }}
+                        {% endif %}
+                        <td>
+                    </tr>
+                </tbody>
+            </table>
+        </header>
+    </article>
 
 
 

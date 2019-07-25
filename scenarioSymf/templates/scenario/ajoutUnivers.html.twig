@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
+    {% block contener %}
         {{ parent() }}
-        <h1> Ajouter un univers</h1>
-        {{ form_start(formulaire) }}
-            {{ form_widget(formulaire) }}
-            <input type=submit value="Créer un monde merveilleux"/>
-        {{ form_end(formulaire) }}
-
-        <h2> Modifier un univers </h2>
-        <ul>
-        {% for univer in univers %}
-            <li><a href="{{ path('modificationUnivers', {'id':univer.id}) }}">{{univer.nom}}</a></li><br>
-        {% endfor %}
-        </ul>
-    {% endblock %}
+            <article class="box post post-excerp">
+                <h2> Ajouter un univers</h2>
+                    <header>
+                        {{ form_start(formulaire) }}
+                            {{ form_widget(formulaire) }}
+                            <input type=submit value="Créer un monde merveilleux"/>
+                        {{ form_end(formulaire) }}
+                    </header>
+            </article>
+            <section class="box recent-comments">
+                <h2> Modifier un univers </h2>
+                <br>
+                <ul>
+                {% for univer in univers %}
+                    <li><a href="{{ path('modificationUnivers', {'id':univer.id}) }}">{{univer.nom}}</a></li><br>
+                {% endfor %}
+                </ul>
+            </section>
+            {% endblock %}

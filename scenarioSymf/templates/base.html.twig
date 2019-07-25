@@ -20,94 +20,94 @@
         {% block body %}
             <header>
                 {% block header %}
-                <div  id="sidebar">
-                    <h1 id="logo">Scénariothèque des gobelins</h1>
-                    <nav id="nav" class="box recent-posts">
-                        {% block nav %}
-                        <ul>
-                            <li> <a href="{{ path('accueil') }}">Accueil</a></li>
-                            <br>
-                            <li> <a href="{{ path('scenarios') }}">Scénarios</a></li>
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <li> <a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-                                <li> <a href="{{ path('monProfil', {'id':app.user.id}) }}">Mon Compte</a></li>
-                                <li> <a href="{{path('session_calendar')}}">Accéder au calendrier des sessions</a></li>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <li> <a href="{{ path('ajout') }}">Nouvelle aventure</a></li>
-                                    <li> <a href="{{ path('ajoutUnivers') }}">Les univers</a></li>
-                                    <li> <a href="{{ path('parametre_utilisateur') }}">Paramètre</a></li>
+                    <div id="sidebar">
+                        <h1 id="logo">Scénariothèque des gobelins</h1>
+                        <nav id="nav" class="box recent-posts">
+                            {% block nav %}
+                            <ul>
+                                <li> <a href="{{ path('accueil') }}">Accueil</a></li>
+                                <br>
+                                <li> <a href="{{ path('scenarios') }}">Scénarios</a></li>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <li> <a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                                    <li> <a href="{{ path('monProfil', {'id':app.user.id}) }}">Mon Compte</a></li>
+                                    <li> <a href="{{path('session_calendar')}}">Accéder au calendrier des sessions</a></li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li> <a href="{{ path('ajout') }}">Nouvelle aventure</a></li>
+                                        <li> <a href="{{ path('ajoutUnivers') }}">Les univers</a></li>
+                                        <li> <a href="{{ path('parametre_utilisateur') }}">Paramètre</a></li>
+                                    {% endif %}
+                                {% else %}
+                                    <li> <a href="{{ path('app_login') }}">se connecter</a></li>
+                                    <li> <a href="{{ path('inscription') }}">s'inscrire</a></li>
                                 {% endif %}
-                            {% else %}
-                                <li> <a href="{{ path('app_login') }}">se connecter</a></li>
-                                <li> <a href="{{ path('inscription') }}">s'inscrire</a></li>
-                            {% endif %}
 
-                        </ul>
-                        {% endblock %}
-                    </nav>
-                </div>
+                            </ul>
+                            {% endblock %}
+                        </nav>
+                    </div>
+                    {% endblock %}
+                </header>
+                <div id="content">
+                    <div class="inner">
+                    {% block contener %}
+                    {% for message in
+                        app.session.flashBag.get('scenario') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('univers') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('commentaire') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('suppression') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('suppressionCommentaire') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('modification') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('modificationCompte') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('suppressionUser') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('DemandeSuppressionUser') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('modificationUnivers') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('modificationCommentaire') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('inscription') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    {% for message in
+                        app.session.flashBag.get('suppressionPj') %}
+                        <span class='button next'>{{message}}</span>
+                    {% endfor %}
+                    <br>
                 {% endblock %}
-            </header>
-            <div id="content">
-                <div class="inner">
-                {% block contener %}
-                {% for message in
-                    app.session.flashBag.get('scenario') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('univers') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('commentaire') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('suppression') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('suppressionCommentaire') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('modification') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('modificationCompte') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('suppressionUser') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('DemandeSuppressionUser') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('modificationUnivers') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('modificationCommentaire') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('inscription') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                {% for message in
-                    app.session.flashBag.get('suppressionPj') %}
-                    <span class='button next'>{{message}}</span>
-                {% endfor %}
-                <br>
-            {% endblock %}
 
+                </div>
             </div>
-        </div>
         {% block javascripts %}
             <script src="html5up-striped/assets/js/breakpoints.min.js"></script>
             <script src="html5up-striped/assets/js/browser.min.js"></script>
