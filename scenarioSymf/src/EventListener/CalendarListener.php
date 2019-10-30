@@ -42,7 +42,7 @@ class CalendarListener
             $sessionEvent = new Event(
                 $session->getId(),
                 $session->getDateDebut(),
-                $session->getDateFin(), // si la date de fin est null alors l'évènement sera créé sur la journée complète
+                $session->getDateFin() // si la date de fin est null alors l'évènement sera créé sur la journée complète
                 // $session->getLieu(),
                 // $session->getMj()
                 // $session->getPersonnageJoueur(),
