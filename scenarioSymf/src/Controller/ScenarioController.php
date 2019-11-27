@@ -179,7 +179,7 @@ class ScenarioController extends AbstractController
 
 
         //accès au tableau univers
-        $univers = $depot->findAll();
+        // $univers = $depot->findAll();
 
         /**********enregistrement des valeurs*************/
         $formulaire->handleRequest($requete);

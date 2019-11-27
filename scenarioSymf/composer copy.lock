@@ -576,7 +576,7 @@
                 "doctrine/doctrine-bundle": "~1.0",
                 "doctrine/migrations": "^2.0",
                 "php": "^7.1",
-                "symfony/framework-bundle": "4.2.7"
+                "symfony/framework-bundle": "~3.4|~4.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^5.0",
