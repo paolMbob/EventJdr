@@ -68,7 +68,7 @@ class AuthentificationAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Aucun compte n\'existe avec cet email et ce mot de passe.');
         }
 
         return $user;

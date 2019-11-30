@@ -18,7 +18,10 @@ class SessionType extends AbstractType
     {
 
         $builder
-            ->add('dateDebut')
+            ->add('dateDebut', DateType::class, [
+                'widget'=> 'single_text',
+                'format' => 'yyyy-MM-dd'
+            ])
             ->add('lieu')
             ->add('dateFin')
             ->add('scenario',EntityType::class, [

@@ -1672,10 +1672,19 @@ input, select, textarea {
 		margin: 0 0 0.75em 0;
 	}
 
+	form select {
+		display: inline;
+		border-radius: 0.4em;
+		-webkit-appearance: none;
+		border: solid 1px #ddd;
+		padding: 0.5em 0.75em;
+		margin: 5px;
+		line-height: 1.25em;
+	}
+
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
-	form select,
 	form textarea {
 		display: block;
 		border-radius: 0.4em;
@@ -1685,6 +1694,8 @@ input, select, textarea {
 		/* width: 100%; */
 		line-height: 1.25em;
 	}
+
+	
 
 		form input[type="text"]:focus,
 		form input[type="email"]:focus,
@@ -2591,11 +2602,11 @@ input, select, textarea {
 
 			.box.post .info {
 				position: absolute;
-				width: 5.5em;
+				width:7em;
 				overflow: hidden;
 				background-color: #fff;
 				background-image: url("images/bg02.png");
-				left: -10.5em;
+				left: -12em;
 				top: 0;
 				padding: 1.5em 1em 1.5em 1em;
 				border-top-left-radius: 0.4em;

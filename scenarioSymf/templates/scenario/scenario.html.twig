@@ -11,8 +11,8 @@
                 {# <ul class="stats"> #}
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
 
-                        <span class="date"><a href="{{path('session', {'id':scenario.id}) }}" class="icon fa-calendar"></a>sessions</span>
-                        <span class="date"><a href="{{ path('commentaire', {'id':scenario.id}) }}" class="icon  fa-comment"></a> Votre avis</span>
+                        <span class="date"><a href="{{path('session', {'id':scenario.id}) }}" class="icon fa-calendar"> sessions</a></span>
+                        <span class="date"><a href="{{ path('commentaire', {'id':scenario.id}) }}" class="icon  fa-comment"> avis</a></span>
                     {% else %}
                         <span class="date"><span class="icon  fa-comment">donner votre avis</span></span>
                         <span class="date"><a href="{{ path('app_login')}}">connexion</a></span>
@@ -20,7 +20,7 @@
                         </span>
                     {% endif %}<br>
                     {% if is_granted("ROLE_ADMIN") %}
-                        <span class="date"><a href="{{ path('session_new', {'id':app.user.id})   }}" class="icon fa-plus-square"></a>ajouter une session</span>
+                        <span class="date"><a href="{{ path('session_new', {'id':app.user.id})   }}" class="icon fa-plus-square"> nouvelle session</a></span>
                     {% endif %}
                 {# </ul> #}
             </div>
