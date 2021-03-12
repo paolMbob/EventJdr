@@ -4256,16 +4256,16 @@
         },
         {
             "name": "symfony/requirements-checker",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/requirements-checker.git",
-                "reference": "8151a5deeec2725693b37a5f409a26b2a8a4d5f3"
+                "reference": "991978163f5a653a17e7b7592157c096c2afd2f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/requirements-checker/zipball/8151a5deeec2725693b37a5f409a26b2a8a4d5f3",
-                "reference": "8151a5deeec2725693b37a5f409a26b2a8a4d5f3",
+                "url": "https://api.github.com/repos/symfony/requirements-checker/zipball/991978163f5a653a17e7b7592157c096c2afd2f7",
+                "reference": "991978163f5a653a17e7b7592157c096c2afd2f7",
                 "shasum": ""
             },
             "require": {
@@ -4300,7 +4300,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2018-12-22T08:23:45+00:00"
+            "time": "2019-06-25T16:43:49+00:00"
         },
         {
             "name": "symfony/routing",
@@ -5789,6 +5789,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2018-08-13T20:36:59+00:00"
         },
         {
@@ -5843,6 +5844,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         }
     ],
@@ -5895,6 +5897,7 @@
                 "monolog",
                 "productivity"
             ],
+            "abandoned": true,
             "time": "2018-07-27T15:41:37+00:00"
         },
         {
@@ -5902,12 +5905,12 @@
             "version": "1.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/php-webdriver.git",
+                "url": "https://github.com/php-webdriver/php-webdriver-archive.git",
                 "reference": "bd8c740097eb9f2fc3735250fc1912bc811a954e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/bd8c740097eb9f2fc3735250fc1912bc811a954e",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver-archive/zipball/bd8c740097eb9f2fc3735250fc1912bc811a954e",
                 "reference": "bd8c740097eb9f2fc3735250fc1912bc811a954e",
                 "shasum": ""
             },
@@ -5955,6 +5958,7 @@
                 "selenium",
                 "webdriver"
             ],
+            "abandoned": "php-webdriver/webdriver",
             "time": "2018-05-16T17:37:13+00:00"
         },
         {
@@ -6674,7 +6678,7 @@
         },
         {
             "name": "symfony/web-server-bundle",
-            "version": "v4.2.5",
+            "version": "v4.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-server-bundle.git",

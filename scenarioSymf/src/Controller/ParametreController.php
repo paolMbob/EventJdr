@@ -50,6 +50,8 @@ class ParametreController extends AbstractController
         //recuperation de le collection user
         $utilisateur = $this->getDoctrine()->getRepository(User::class)->findAll();
 
+        //test
+
 
         return $this->render('home/parametre_utilisateur.html.twig',
                                 array("users"=>$utilisateur));
